@@ -1,0 +1,207 @@
+/* Empty CSS file for your own CSS*/
+#Tdireccion{
+    text-align:center;
+    margin-top:50px;
+}
+#cabecera{
+    border:0px dotted #000;
+}
+#Garza{
+    text-align:center;
+    margin-top:10px;
+}
+#seccionSupLogin{
+    border:1px dotted #f00;
+    text-align:center;
+    margin-top:10px;
+}
+#seccionSupLogout{
+    border:1px dotted #f00;
+    text-align:left;
+    margin-top:10px;
+}
+#nombreU{
+    font-size: x-large;
+    margin-left: 20px;
+}
+#CerrarSesion{
+    text-align:center;
+}
+#seccionSupLogout{
+    display:none;
+}
+#IndexFormContent{
+    /*position:absolute;*/
+    top:5%;
+    width:50%;
+    /*left:25%;*/
+}
+#ingresa{
+    width: 100%;
+}
+#pie{
+    /*
+    border:1px dotted #f00;
+    text-align:center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    border: 0px solid #00d3ff;
+    */
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #d9534f;
+    color: white;
+    text-align: center;
+}
+.tarjeta{
+    width: 80%;
+    height: 80%;
+    padding: 1% 5% 5% 5%;
+    text-align: center;
+    margin-left: 10%;
+    align-items: center;
+    margin: 1;
+    border: 5px Solid red;
+    border-radius: 30px;
+}
+.parrafo{
+    font-size: x-large;
+}
+
+#img_:hover
+{
+    -moz-box-shadow: 0px 0px 30px #0fd6ff;
+    -webkit-box-shadow: 0px 0px 30px #A3FF0F;
+    box-shadow: 0px 0px 30px #0f91ff;
+    /*padding: 10px;*/
+    border: 1px solid #00d3ff;
+    /*width: 160px;*/
+    /*margin: 40px;*/
+    border-radius: 10px;
+}
+
+#img_ {
+    transition-property: opacity, left, top, height;
+    transition-duration: 1s, 10s;
+    cursor:pointer;
+    width:100px;
+}
+
+#img_P {
+    transition-property: opacity, left, top, height;
+    transition-duration: 1s, 10s;
+    cursor:pointer;
+    width:50px;
+}
+
+#img_AP:hover
+{
+    -moz-box-shadow: 0px 0px 30px #0fd6ff;
+    -webkit-box-shadow: 0px 0px 30px #A3FF0F;
+    box-shadow: 0px 0px 30px #0f91ff;
+    /*padding: 10px;*/
+    border: 1px solid #00d3ff;
+    /*width: 160px;*/
+    /*margin: 40px;*/
+    border-radius: 10px;
+}
+
+#img_AP {
+    transition-property: opacity, left, top, height;
+    transition-duration: 1s, 10s;
+    cursor:pointer;
+    width:100px;
+}
+#img_ADM:hover
+{
+    -moz-box-shadow: 0px 0px 30px #0fd6ff;
+    -webkit-box-shadow: 0px 0px 30px #A3FF0F;
+    box-shadow: 0px 0px 30px #0f91ff;
+    /*padding: 10px;*/
+    border: 1px solid #00d3ff;
+    /*width: 160px;*/
+    /*margin: 40px;*/
+    border-radius: 10px;
+}
+#img_ADM {
+    transition-property: opacity, left, top, height;
+    transition-duration: 1s, 10s;
+    cursor:pointer;
+    width:100px;
+}
+#img_REV:hover
+{
+    -moz-box-shadow: 0px 0px 30px #0fd6ff;
+    -webkit-box-shadow: 0px 0px 30px #A3FF0F;
+    box-shadow: 0px 0px 30px #0f91ff;
+    /*padding: 10px;*/
+    border: 1px solid #00d3ff;
+    /*width: 160px;*/
+    /*margin: 40px;*/
+    border-radius: 10px;
+}
+#img_REV {
+    transition-property: opacity, left, top, height;
+    transition-duration: 1s, 10s;
+    cursor:pointer;
+    width:100px;
+}
+#img_PR:hover
+{
+    -moz-box-shadow: 0px 0px 30px #0fd6ff;
+    -webkit-box-shadow: 0px 0px 30px #A3FF0F;
+    box-shadow: 0px 0px 30px #0f91ff;
+    /*padding: 10px;*/
+    border: 1px solid #00d3ff;
+    /*width: 160px;*/
+    /*margin: 40px;*/
+    border-radius: 10px;
+}
+#img_EC {
+    transition-property: opacity, left, top, height;
+    transition-duration: 1s, 10s;
+    cursor:pointer;
+    width:100px;
+}
+#img_EC:hover
+{
+    -moz-box-shadow: 0px 0px 30px #0fd6ff;
+    -webkit-box-shadow: 0px 0px 30px #A3FF0F;
+    box-shadow: 0px 0px 30px #0f91ff;
+    /*padding: 10px;*/
+    border: 1px solid #00d3ff;
+    /*width: 160px;*/
+    /*margin: 40px;*/
+    border-radius: 10px;
+}
+#img_PR {
+    transition-property: opacity, left, top, height;
+    transition-duration: 1s, 10s;
+    cursor:pointer;
+    width:100px;
+}
+#header-column-from {
+    padding : 1% 1% 1% 1%;
+}
+#btnDescargarAviso {
+    width:  100%;
+    cursor:pointer;
+}
+#btnCargarAviso {
+    width:  100%;
+    cursor:pointer;
+}
+#Lcontent {
+    height: 450px;
+    overflow-y: scroll;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+.contenedor{
+    height: auto;
+}
