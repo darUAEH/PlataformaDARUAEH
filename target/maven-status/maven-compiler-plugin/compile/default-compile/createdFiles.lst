@@ -1,0 +1,14 @@
+Login.class
+CrearSession.class
+validaAdhesion.class
+com\daruaeh\plataformadaruaeh\resources\JavaEE8Resource.class
+consultaNEsession.class
+com\daruaeh\plataformadaruaeh\JAXRSConfiguration.class
+LoginParameters.class
+ConsultaArchivo.class
+CerrarSesion.class
+EnvioAdhesion.class
+ConsultaTodasAdhesion.class
+VerSession.class
+subeAviso.class
+FormatosParameters.class

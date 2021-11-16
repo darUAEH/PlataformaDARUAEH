@@ -5,9 +5,9 @@
 --%>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-1">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-10">
             <h2>Solicitud de Incorporación al Plan de Ahorro para el Retiro</h2><!-- comment -->
             <br>
             <p>Con fundamento en el artículo 4 del Reglamento del Plan de Ahorro para el retiro, 
@@ -16,18 +16,18 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
-                        <button class="btn btn-outline-info" id="btnDescargarAviso" name="btnDescargarAviso" type="submit" onclick="window.open('../pdf/adhesion.pdf')">Descargar solicitud de incorporacion</button>
+                    <div class="col-md-3">
+                        <button class="btn btn-outline-info" id="btnDescargarAviso" name="btnDescargarAviso" type="submit" onclick="window.open('../pdf/adhesion.pdf')">Descargar <br/> Solicitud de incorporacion</button>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <form enctype="multipart/form-data" id="formuploadajax" method="post">
                             <input  type="file" name="file" id="file" class="btn btn-outline-success"  Subir solicitud de incorporacion />
                             <br>
                             <br>
-                            <button class="btn btn-outline-info" id="btnCargarAviso" name="btnCargarAviso" type="button" onclick="subeArchivo()">Cargar solicitud de incorporacion</button>
+                            <button class="btn btn-outline-info" id="btnCargarAviso" name="btnCargarAviso" type="button" onclick="subeArchivo()">Cargar <br/> Solicitud de incorporacion</button>
                         </form>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <p>Estatus del documento:<div id="mensaje"></div></p>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
 
 
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
         </div>
     </div>
 </div>

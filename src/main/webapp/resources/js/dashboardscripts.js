@@ -219,7 +219,26 @@ function validarCarga() {
         if (resp['codigo'] === 1) {
             $('#btnCargarAviso').hide();
             $("#file").prop('disabled', true);
-            $("#mensaje").text(resp['estatus'] + ", Enviado el " + resp['MT']);
+          
+            $("#mensaje").text(resp['estatus']);
+            $("#mensaje").append(" <br> el " + resp['MT'] );
+            
+        }
+        if (resp['codigo'] === 2) {
+            $('#btnCargarAviso').hide();
+            $("#file").prop('disabled', true);
+          
+            $("#mensaje").text(resp['estatus']);
+            $("#mensaje").append(" <br> el " + resp['MT'] );
+            
+        }
+        if (resp['codigo'] === 3) {
+            $('#btnCargarAviso').hide();
+            $("#file").prop('disabled', true);
+          
+            $("#mensaje").text(resp['estatus']);
+            $("#mensaje").append(" <br> el " + resp['MT'] );
+            
         }
         if (resp['codigo'] === 0) {
 
@@ -255,9 +274,27 @@ function ConsultaTodasAdhesion() {
         dataAd = JSON.parse(response);
         var reg = JSON.parse(dataAd)
         for (let i = 0; i < reg['Registros'].length; i++) {
-            $("#TablaPendientes > tbody").append("<tr id='Fila" + reg['Registros'][i].NumeroEmpleado + "'><td>"+(i+1)+"</td><td>"+reg['Registros'][i].NumeroEmpleado+"</td><td>"+reg['Registros'][i].FechaHora+"</td><td><button class='btn btn-outline-info btn-sm' id='btn-"+reg['Registros'][i].NumeroEmpleado+"' >Ver Formato</button><br><br><button class='btn btn-outline-success btn-sm'>Aprobar Formato</button><br><br><button class='btn btn-outline-danger btn-sm'>Rechazar Formato</button></td></tr>")
+
+            var chain = "<tr id='Fila" + reg['Registros'][i].NumeroEmpleado + "'>" +
+                    "<td>" + (i + 1) + "</td>" +
+                    "<td>" + reg['Registros'][i].NumeroEmpleado + "</td>" +
+                    "<td>" + reg['Registros'][i].FechaHora + "</td>" +
+                    "<td>" +
+                    "<button class='btn btn-outline-info btn-sm' id='btn-" + reg['Registros'][i].NumeroEmpleado + "' >Ver Formato</button> &nbsp " +
+                    "<button class='btn btn-outline-success btn-sm'>Aprobar Formato</button> &nbsp" +
+                    "<button class='btn btn-outline-danger btn-sm'>Rechazar Formato</button>";
+            //console.log("chain "+chain)
+            
+            
+            $("#TablaPendientes > tbody").append(chain)
+
+            $("#btn-" + reg['Registros'][i].NumeroEmpleado).click(function () {
+                console.log("i " + i);
+                reconoce(i);
+            });
+            $("#Fila"+ reg['Registros'][i].NumeroEmpleado).css("text-align", "left"); 
         }
-        console.log(dataAd);
+        console.log("dataAd " + dataAd);
 
         //
     });
@@ -265,19 +302,89 @@ function ConsultaTodasAdhesion() {
 }
 
 var dataAd = [];
+var archivoPDF;
+function reconoce(fila) {
+$("#Lcontent").height('100%')
+$("#PDFM").empty();
+    console.log("reconoce " + fila)
+    var reg = JSON.parse(dataAd);
+    console.log("NumeroEmpleado " + reg["Registros"][fila].NumeroEmpleado);
+    console.log("NumeroEmpleado " + reg["Registros"][fila].FechaHora);
+    console.log("NumeroEmpleado " + reg["Registros"][fila].Estatus);
+    console.log("NumeroEmpleado " + reg["Registros"][fila].Formato);
 
-function scrollea(){
-      $('#Lcontent').on('scroll', function () { // Evento de Scroll
-      if ($('#Lcontent').scrollTop() >= ($('#Lcontent').height()/3)) 
-{ // Si estamos al final de la página
+    var settings = {
+        "url": "../../ConsultaArchivo",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "data": {
+            "NumeroEmpleado": reg["Registros"][fila].NumeroEmpleado,
+            "Formato": reg["Registros"][fila].Formato,
+            "Estatus": reg["Registros"][fila].Estatus
+        }
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        var PDFresponse = JSON.parse(response);
+        var cadena = PDFresponse["archivo"];
+
+        var S1 = cadena.slice(0, -1)
+        var S2 = S1.slice(2)
+
+        console.log(S2);
+
+
+        var bin = atob(S2);
+        /*
+        console.log('File Size:', Math.round(bin.length / 1024), 'KB');
+        console.log('PDF Version:', bin.match(/^.PDF-([0-9.]+)/)[1]);
+        console.log('Create Date:', bin.match(/<xmp:CreateDate>(.+?)<\/xmp:CreateDate>/)[1]);
+        console.log('Modify Date:', bin.match(/<xmp:ModifyDate>(.+?)<\/xmp:ModifyDate>/)[1]);
+        console.log('Creator Tool:', bin.match(/<xmp:CreatorTool>(.+?)<\/xmp:CreatorTool>/)[1]);
+*/
+// Embed the PDF into the HTML page and show it to the user
+
+//        var link = document.createElement('a');
+//        link.innerHTML = 'Descarga el Archivo';
+//        link.download = reg["Registros"][fila].NumeroEmpleado+'.pdf';
+//        link.href = 'data:application/octet-stream;base64,' + S2;
+//        //document.body.appendChild(link);
+//        $("#PDFM").append(link);
+        
+        
+        var obj = document.createElement('object');
+        obj.style.width = '90%';
+        obj.style.height = '350pt';
+        obj.type = 'application/pdf';
+        obj.data = 'data:application/pdf;base64,' + S2;
+        //document.body.appendChild(obj);
+       
+        $("#PDFM").append(obj);
+
+// Insert a link that allows the user to download the PDF file
+        
+
+
+    });
+
+
+}
+function scrollea() {
+    $('#Lcontent').on('scroll', function () { // Evento de Scroll
+        if ($('#Lcontent').scrollTop() >= ($('#Lcontent').height() / 3))
+        { // Si estamos al final de la página
 //console.log("Final de la pagina")
-          $('#pie').stop(true).animate({ // Escondemos el div
-              opacity: 0
-          }, 250);
-      } else { // Si no
-          $('#pie').stop(true).animate({ // Mostramos el div
-              opacity: 1
-          }, 200);
-      }
-  });
+            $('#pie').stop(true).animate({// Escondemos el div
+                opacity: 0
+            }, 250);
+        } else { // Si no
+            $('#pie').stop(true).animate({// Mostramos el div
+                opacity: 1
+            }, 200);
+        }
+    });
 }
