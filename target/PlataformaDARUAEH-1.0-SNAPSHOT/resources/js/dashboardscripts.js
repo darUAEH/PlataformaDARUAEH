@@ -280,17 +280,22 @@ function ConsultaTodasAdhesion() {
                     "<td>" + reg['Registros'][i].NumeroEmpleado + "</td>" +
                     "<td>" + reg['Registros'][i].FechaHora + "</td>" +
                     "<td>" +
-                    "<button class='btn btn-outline-info btn-sm' id='btn-" + reg['Registros'][i].NumeroEmpleado + "' >Ver Formato</button> &nbsp " +
-                    "<button class='btn btn-outline-success btn-sm'>Aprobar Formato</button> &nbsp" +
-                    "<button class='btn btn-outline-danger btn-sm'>Rechazar Formato</button>";
+                    "<button class='btn btn-outline-info btn-sm' id='btn-" + reg['Registros'][i].NumeroEmpleado + "V' >Ver Formato</button> &nbsp " +
+                    "<button class='btn btn-outline-success btn-sm' id ='btn-'" + reg['Registros'][i].NumeroEmpleado + "A'>Aprobar Formato</button> &nbsp" +
+                    "<button class='btn btn-outline-danger btn-sm' id ='btn-'" + reg['Registros'][i].NumeroEmpleado + "R'>Rechazar Formato</button>";
             //console.log("chain "+chain)
             
             
             $("#TablaPendientes > tbody").append(chain)
 
-            $("#btn-" + reg['Registros'][i].NumeroEmpleado).click(function () {
-                console.log("i " + i);
-                reconoce(i);
+            $("#btn-" + reg['Registros'][i].NumeroEmpleado+"V").click(function () {
+                reconoce(i,2);
+            });
+            $("#btn-" + reg['Registros'][i].NumeroEmpleado+"A").click(function () {
+                reconoceA(i,3);
+            });
+            $("#btn-" + reg['Registros'][i].NumeroEmpleado+"R").click(function () {
+                reconoceA(i,4);
             });
             $("#Fila"+ reg['Registros'][i].NumeroEmpleado).css("text-align", "left"); 
         }
@@ -303,7 +308,7 @@ function ConsultaTodasAdhesion() {
 
 var dataAd = [];
 var archivoPDF;
-function reconoce(fila) {
+function reconoce(fila,valor) {
 $("#Lcontent").height('100%')
 $("#PDFM").empty();
     console.log("reconoce " + fila)
@@ -337,25 +342,6 @@ $("#PDFM").empty();
 
         console.log(S2);
 
-
-        var bin = atob(S2);
-        /*
-        console.log('File Size:', Math.round(bin.length / 1024), 'KB');
-        console.log('PDF Version:', bin.match(/^.PDF-([0-9.]+)/)[1]);
-        console.log('Create Date:', bin.match(/<xmp:CreateDate>(.+?)<\/xmp:CreateDate>/)[1]);
-        console.log('Modify Date:', bin.match(/<xmp:ModifyDate>(.+?)<\/xmp:ModifyDate>/)[1]);
-        console.log('Creator Tool:', bin.match(/<xmp:CreatorTool>(.+?)<\/xmp:CreatorTool>/)[1]);
-*/
-// Embed the PDF into the HTML page and show it to the user
-
-//        var link = document.createElement('a');
-//        link.innerHTML = 'Descarga el Archivo';
-//        link.download = reg["Registros"][fila].NumeroEmpleado+'.pdf';
-//        link.href = 'data:application/octet-stream;base64,' + S2;
-//        //document.body.appendChild(link);
-//        $("#PDFM").append(link);
-        
-        
         var obj = document.createElement('object');
         obj.style.width = '90%';
         obj.style.height = '350pt';
@@ -364,10 +350,51 @@ $("#PDFM").empty();
         //document.body.appendChild(obj);
        
         $("#PDFM").append(obj);
+        reconoceA(i,valor)
 
-// Insert a link that allows the user to download the PDF file
-        
+    });
 
+
+}
+function reconoceA(fila,valor) {
+
+    console.log("NumeroEmpleado " + reg["Registros"][fila].NumeroEmpleado);
+    console.log("NumeroEmpleado " + reg["Registros"][fila].FechaHora);
+    console.log("NumeroEmpleado " + reg["Registros"][fila].Estatus);
+    console.log("NumeroEmpleado " + reg["Registros"][fila].Formato);
+
+    var settings = {
+        "url": "../../InsertaCambioEstatus",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "data": {
+            "NumeroEmpleado": reg["Registros"][fila].NumeroEmpleado,
+            "Formato": reg["Registros"][fila].Formato,
+            "Estatus": valor
+        }
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        var PDFresponse = JSON.parse(response);
+        var cadena = PDFresponse["archivo"];
+
+        var S1 = cadena.slice(0, -1)
+        var S2 = S1.slice(2)
+
+        console.log(S2);
+
+        var obj = document.createElement('object');
+        obj.style.width = '90%';
+        obj.style.height = '350pt';
+        obj.type = 'application/pdf';
+        obj.data = 'data:application/pdf;base64,' + S2;
+        //document.body.appendChild(obj);
+       
+        $("#PDFM").append(obj);
 
     });
 
